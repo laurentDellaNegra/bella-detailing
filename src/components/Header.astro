@@ -1,0 +1,134 @@
+---
+const menuItems = [
+  { name: "Tarifs", href: "#pricing" },
+  { name: "Avis", href: "#reviews" },
+  { name: "À propos", href: "#description" },
+];
+
+// State to control the mobile menu toggle
+let isMenuOpen = false;
+
+function toggleMenu() {
+  isMenuOpen = !isMenuOpen;
+}
+---
+
+<header class="sticky inset-x-0 top-0 z-50 bg-white shadow-lg">
+  <nav
+    class="flex items-center justify-between p-2 lg:px-8"
+    aria-label="Global"
+  >
+    <div class="flex lg:flex-1">
+      <a href="#" class="-m-1.5 p-1.5 flex items-center justify-center gap-5">
+        <span class="sr-only">Bella-Detailing</span>
+        <img class="h-20 w-auto" src="/logo.svg" alt="" />
+        <span
+          class="text-2xl md:text-3xl font-extrabold tracking-wide bg-gradient-to-r from-indigo-600 via-green-500 to-purple-500 bg-clip-text text-transparent animate-gradient"
+          >Bella detailing</span
+        >
+      </a>
+    </div>
+    <div class="flex lg:hidden">
+      <button
+        id="hamburger"
+        type="button"
+        class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+      >
+        <span class="sr-only">Ouvrir menu</span>
+        <svg
+          class="size-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          aria-hidden="true"
+          data-slot="icon"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="hidden lg:flex lg:gap-x-12">
+      {
+        menuItems.map((item) => (
+          <a href={item.href} class="text-sm/6 font-semibold text-gray-900">
+            {item.name}
+          </a>
+        ))
+      }
+    </div>
+  </nav>
+
+  <!-- Mobile menu, show/hide based on menu open state. -->
+  <div id="mobile-nav" class="hidden lg:hidden" role="dialog" aria-modal="true">
+    <!-- Background backdrop, show/hide based on slide-over state. -->
+    <div class="hidden fixed inset-0 z-50"></div>
+    <div
+      class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
+    >
+      <div class="flex items-center justify-between">
+        <a href="#" class="-m-1.5 p-1.5">
+          <span class="sr-only">Your Company</span>
+          <img class="h-20 w-auto" src="/logo.svg" alt="" />
+        </a>
+        <button
+          id="close"
+          type="button"
+          class="-m-2.5 rounded-md p-2.5 text-gray-700"
+        >
+          <span class="sr-only">Close menu</span>
+          <svg
+            class="size-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+            data-slot="icon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18 18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="mt-6 flow-root">
+        <div class="-my-6 divide-y divide-gray-500/10">
+          <div class="space-y-2 py-6">
+            {
+              menuItems.map((item) => (
+                <a
+                  href={item.href}
+                  class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                >
+                  {item.name}
+                </a>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<script>
+  const button = document.querySelector("#hamburger");
+  const close = document.querySelector("#close");
+  const navMenu = document.querySelector("#mobile-nav");
+
+  // Handle clicks on each button.
+  button?.addEventListener("click", () => {
+    navMenu?.classList.toggle("block");
+    navMenu?.classList.toggle("hidden");
+  });
+
+  // Handle clicks on each button.
+  close?.addEventListener("click", () => {
+    console.log("coucou");
+    navMenu?.classList.add("hidden");
+  });
+</script>
